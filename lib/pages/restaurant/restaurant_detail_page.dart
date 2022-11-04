@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_flutter_alterra/models/restaurant_model.dart';
+import 'package:mini_project_flutter_alterra/pages/review/review_list_page.dart';
 import 'package:mini_project_flutter_alterra/providers/database_provider.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
+import 'package:mini_project_flutter_alterra/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
@@ -21,8 +23,10 @@ class RestaurantDetailPage extends StatelessWidget {
         child: Container(
           margin: EdgeInsets.all(defaultMargin),
           padding: const EdgeInsets.all(8),
-          decoration:
-              const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+          decoration: BoxDecoration(
+            color: secondColor,
+            borderRadius: BorderRadius.circular(15),
+          ),
           child: Icon(
             Icons.arrow_back,
             size: 28,
@@ -155,23 +159,6 @@ class RestaurantDetailPage extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          Text(
-                            'Photos',
-                            style: blackTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: semiBold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          // Row(
-                          //   children: [
-                          //     PhotoItem(restaurants: restaurant),
-                          //     PhotoItem(restaurants: restaurant),
-                          //     PhotoItem(restaurants: restaurant),
-                          //   ],
-                          // ),
                         ],
                       ),
                     ),
@@ -204,6 +191,18 @@ class RestaurantDetailPage extends StatelessWidget {
                                 ),
                               ],
                             ),
+                          ),
+                          CustomButton(
+                            title: 'Review',
+                            width: 100,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ReviewListPage(),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

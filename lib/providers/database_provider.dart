@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_flutter_alterra/db/database_helper.dart';
 import 'package:mini_project_flutter_alterra/models/restaurant_model.dart';
+import 'package:mini_project_flutter_alterra/models/review_model.dart';
 import 'package:mini_project_flutter_alterra/utils/result_state.dart';
 
 class DatabaseProvider extends ChangeNotifier {
@@ -9,10 +10,14 @@ class DatabaseProvider extends ChangeNotifier {
   List<RestaurantModel> _favorite = [];
   List<RestaurantModel> get favorite => _favorite;
 
+  List<ReviewModel> _review = [];
+  List<ReviewModel> get review => _review;
+
   // mengimplementasi state management untuk mengakses data dari database
   DatabaseProvider() {
     _dbHelper = DatabaseHelper();
     _getAllFavorites();
+    _getAllReviews();
   }
 
   ResultState _state = ResultState.loading;
@@ -57,5 +62,31 @@ class DatabaseProvider extends ChangeNotifier {
       _message = 'Error: $e';
     }
     notifyListeners();
+  }
+
+  //=========================REVIEW PROVIDER=============================//
+
+  void _getAllReviews() async {
+    _review = await _dbHelper.getReview();
+    notifyListeners();
+  }
+
+  Future<void> addReview(ReviewModel review) async {
+    await _dbHelper.insertReview(review);
+    _getAllReviews();
+  }
+
+  Future<ReviewModel> getReviewById(int id) async {
+    return await _dbHelper.getReviewById(id);
+  }
+
+  void updateReview(ReviewModel review) async {
+    await _dbHelper.updateReview(review);
+    _getAllReviews();
+  }
+
+  void deleteReview(int id) async {
+    await _dbHelper.deleteReview(id);
+    _getAllReviews();
   }
 }

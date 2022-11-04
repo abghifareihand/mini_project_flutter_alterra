@@ -22,8 +22,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
 
   @override
   Widget build(BuildContext context) {
+    final text = MediaQuery.of(context).platformBrightness == Brightness.dark
+        ? 'DarkTheme'
+        : 'LightTeme';
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: mainColor,
         title: const Text(
           'Restaurant List',

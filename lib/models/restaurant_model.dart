@@ -7,6 +7,7 @@ class RestaurantModel {
   String pictureId;
   String city;
   double rating;
+  String? comment;
 
   RestaurantModel({
     required this.id,
@@ -15,6 +16,7 @@ class RestaurantModel {
     required this.pictureId,
     required this.city,
     required this.rating,
+    this.comment,
 
   });
 

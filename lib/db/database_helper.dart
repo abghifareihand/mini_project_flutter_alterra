@@ -1,4 +1,5 @@
 import 'package:mini_project_flutter_alterra/models/restaurant_model.dart';
+import 'package:mini_project_flutter_alterra/models/review_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -18,11 +19,12 @@ class DatabaseHelper {
   }
 
   static const String _tableFavorite = 'favorites';
+  static const String _tableReview = 'reviews';
 
   Future<Database> _initializeDb() async {
     var path = await getDatabasesPath();
     var db = openDatabase(
-      join(path, 'restaurant_.db'),
+      join(path, 'restaurant.db'),
       //'$path/restaurantapp.db',
       onCreate: (db, version) async {
         await db.execute('''
@@ -33,6 +35,12 @@ class DatabaseHelper {
             pictureId TEXT,
             city TEXT,
             rating REAL
+          )''');
+        await db.execute('''
+          CREATE TABLE $_tableReview (
+            id INTEGER PRIMARY KEY,
+            nameResto TEXT,
+            descResto TEXT
           )''');
       },
       version: 1,
@@ -83,69 +91,57 @@ class DatabaseHelper {
     );
   }
 
-  // //=======================> MENCOBA ULASAN <=========================//
+  //=====================================================================//
 
-  // Future<void> insertUlasan(RestaurantListModel restaurant) async {
-  //   final Database db = await database;
-  //   await db.insert(_tableUlasan, restaurant.toJson());
-  // }
+  //=======================> METHOD REVIEW FORM <=========================//
 
-  // // menampilkan seluruh data restaurant favorite
-  // Future<List<RestaurantListModel>> getUlasan() async {
-  //   final Database db = await database;
-  //   List<Map<String, dynamic>> results = await db.query(_tableUlasan);
+  Future<void> insertReview(ReviewModel review) async {
+    final Database db = await database;
+    await db.insert(_tableReview, review.toMap());
+  }
 
-  //   return results.map((res) => RestaurantListModel.fromJson(res)).toList();
-  // }
+  // metode untuk menampilkan seluruh note yang disimpan dalam database.
+  Future<List<ReviewModel>> getReview() async {
+    final Database db = await database;
+    List<Map<String, dynamic>> results = await db.query(_tableReview);
 
-  // // mengambil data dengan id
-  // Future<Map> getUlasanById(String id) async {
-  //   final Database db = await database;
-  //   List<Map<String, dynamic>> results = await db.query(
-  //     _tableUlasan,
-  //     where: 'id = ?',
-  //     whereArgs: [id],
-  //   );
+    return results.map((res) => ReviewModel.fromMap(res)).toList();
+  }
 
-  //   if (results.isNotEmpty) {
-  //     return results.first;
-  //   } else {
-  //     return {};
-  //   }
-  // }
+  // metode mengambil data dengan id tertentu
+  Future<ReviewModel> getReviewById(int id) async {
+    final Database db = await database;
+    List<Map<String, dynamic>> results = await db.query(
+      _tableReview,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
 
-  // Future<void> updateUlasan(RestaurantListModel restaurant) async {
-  //   final db = await database;
+    return results.map((res) => ReviewModel.fromMap(res)).first;
+  }
 
-  //   await db.update(
-  //     _tableUlasan,
-  //     restaurant.toJson(),
-  //     where: 'id = ?',
-  //     whereArgs: [restaurant.id],
-  //   );
-  // }
+  // metode untuk memperbarui data
+  Future<void> updateReview(ReviewModel review) async {
+    final db = await database;
 
-  // // fungsi menghapus data favorite
-  // Future<void> deleteUlasan(String id) async {
-  //   final db = await database;
+    await db.update(
+      _tableReview,
+      review.toMap(),
+      where: 'id = ?',
+      whereArgs: [review.id],
+    );
+  }
 
-  //   await db.delete(
-  //     _tableUlasan,
-  //     where: 'id = ?',
-  //     whereArgs: [id],
-  //   );
-  // }
+  // metode untuk menghapus data
+  Future<void> deleteReview(int id) async {
+    final db = await database;
 
-  // Future<RestaurantListModel> getUlasanLagiById(String id) async {
-  //   final Database db = await database;
-  //   List<Map<String, dynamic>> results = await db.query(
-  //     _tableUlasan,
-  //     where: 'id = ?',
-  //     whereArgs: [id],
-  //   );
+    await db.delete(
+      _tableReview,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 
-  //   return results.map((res) => RestaurantModel.fromJson(res)).first;
-  // }
-
-  //=======================> MENCOBA DUMMY <=========================//
+  //======================================================================//
 }

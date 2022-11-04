@@ -12,6 +12,7 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: mainColor,
         title: const Text(
           'Favorite Page',
@@ -25,7 +26,7 @@ class FavoritePage extends StatelessWidget {
             );
           } else if (provider.state == ResultState.error) {
             return const Center(
-              child: Text('Data favorite tidak ada'),
+              child: Text('Empty data favorite'),
             );
           } else {
             return ListView.builder(

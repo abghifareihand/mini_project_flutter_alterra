@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:mini_project_flutter_alterra/pages/favorite_page.dart';
-import 'package:mini_project_flutter_alterra/pages/restaurant_page.dart';
-import 'package:mini_project_flutter_alterra/pages/setting_page.dart';
+import 'package:mini_project_flutter_alterra/pages/favorite/favorite_page.dart';
+import 'package:mini_project_flutter_alterra/pages/restaurant/restaurant_page.dart';
+import 'package:mini_project_flutter_alterra/pages/setting/setting_page.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
 
 class BottomnavPage extends StatefulWidget {

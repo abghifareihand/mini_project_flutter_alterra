@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:mini_project_flutter_alterra/models/restaurant_model.dart';
-import 'package:mini_project_flutter_alterra/pages/restaurant_detail_page.dart';
+import 'package:mini_project_flutter_alterra/pages/restaurant/restaurant_detail_page.dart';
 import 'package:mini_project_flutter_alterra/providers/database_provider.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
 import 'package:provider/provider.dart';

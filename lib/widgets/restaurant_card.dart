@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_flutter_alterra/models/restaurant_model.dart';
-import 'package:mini_project_flutter_alterra/pages/restaurant_detail_page.dart';
+import 'package:mini_project_flutter_alterra/pages/restaurant/restaurant_detail_page.dart';
 import 'package:mini_project_flutter_alterra/providers/database_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -25,11 +25,22 @@ class RestaurantCard extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              RestaurantDetailPage(restaurant: restaurant),
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  RestaurantDetailPage(restaurant: restaurant),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            final tween = Tween(
+                              begin: const Offset(0, 1),
+                              end: Offset.zero,
+                            );
+                            return SlideTransition(
+                              position: animation.drive(tween),
+                              child: child,
+                            );
+                          },
                         ),
                       );
                     },
