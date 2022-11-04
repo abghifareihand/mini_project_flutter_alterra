@@ -1,29 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mini_project_flutter_alterra/pages/bottomnav/bottomnav_page.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
 import 'package:mini_project_flutter_alterra/widgets/custom_button.dart';
 
-class GetStartedPage extends StatefulWidget {
+class GetStartedPage extends StatelessWidget {
   const GetStartedPage({Key? key}) : super(key: key);
-
-  @override
-  State<GetStartedPage> createState() => _GetStartedPageState();
-}
-
-class _GetStartedPageState extends State<GetStartedPage> {
-  @override
-  void initState() {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(
-        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

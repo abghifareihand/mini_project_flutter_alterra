@@ -18,15 +18,7 @@ class _SplashPageState extends State<SplashPage> {
     Timer(const Duration(seconds: 10), () {
       Navigator.pushNamed(context, '/started');
     });
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(
-        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    super.dispose();
   }
 
   @override

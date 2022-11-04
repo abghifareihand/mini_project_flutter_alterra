@@ -30,6 +30,9 @@ TextStyle blueTextStyle = GoogleFonts.poppins(
 TextStyle orangeTextStyle = GoogleFonts.poppins(
   color: mainColor,
 );
+TextStyle orangelightTextStyle = GoogleFonts.poppins(
+  color: secondColor,
+);
 
 FontWeight light = FontWeight.w300;
 FontWeight reguler = FontWeight.w400;

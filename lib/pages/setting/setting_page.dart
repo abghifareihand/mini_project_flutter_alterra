@@ -7,16 +7,31 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: mainColor,
+        title: const Text(
+          'Settings',
+        ),
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Center(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                'Account',
+                style: orangeTextStyle.copyWith(
+                  fontSize: 18,
+                  fontWeight: bold,
+                ),
+              ),
               ListTile(
                 subtitle: Text(
-                  'Profile',
-                  style: blackTextStyle.copyWith(
+                  'Edit Profile',
+                  style: greyTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: semiBold,
                   ),
@@ -25,8 +40,28 @@ class SettingPage extends StatelessWidget {
               ),
               ListTile(
                 subtitle: Text(
-                  'Profile',
-                  style: blackTextStyle.copyWith(
+                  'Help',
+                  style: greyTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
+                  ),
+                ),
+                trailing: const Icon(Icons.arrow_forward_ios),
+              ),
+              const SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                'General',
+                style: orangeTextStyle.copyWith(
+                  fontSize: 18,
+                  fontWeight: bold,
+                ),
+              ),
+              ListTile(
+                subtitle: Text(
+                  'Privacy & Policy',
+                  style: greyTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: semiBold,
                   ),
@@ -35,8 +70,18 @@ class SettingPage extends StatelessWidget {
               ),
               ListTile(
                 subtitle: Text(
-                  'Profile',
-                  style: blackTextStyle.copyWith(
+                  'Term of Service',
+                  style: greyTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
+                  ),
+                ),
+                trailing: const Icon(Icons.arrow_forward_ios),
+              ),
+              ListTile(
+                subtitle: Text(
+                  'Rate App',
+                  style: greyTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: semiBold,
                   ),
