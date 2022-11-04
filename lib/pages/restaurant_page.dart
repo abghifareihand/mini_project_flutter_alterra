@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_flutter_alterra/main.dart';
 import 'package:mini_project_flutter_alterra/providers/restaurant_provider.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
 import 'package:mini_project_flutter_alterra/utils/result_state.dart';
@@ -31,8 +32,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
       body: Consumer<RestaurantProvider>(
         builder: (context, provider, child) {
           if (provider.state == ResultState.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: CircularProgressIndicator(color: mainColor),
             );
           } else if (provider.state == ResultState.error) {
             return Center(
