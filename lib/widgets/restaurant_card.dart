@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_flutter_alterra/models/restaurant_model.dart';
+import 'package:mini_project_flutter_alterra/pages/favorite/favorite_update_page.dart';
 import 'package:mini_project_flutter_alterra/pages/restaurant/restaurant_detail_page.dart';
 import 'package:mini_project_flutter_alterra/providers/database_provider.dart';
 import 'package:provider/provider.dart';
@@ -81,8 +82,17 @@ class RestaurantCard extends StatelessWidget {
                                           icon:
                                               const Icon(Icons.favorite_border),
                                           color: Colors.redAccent,
-                                          onPressed: () =>
-                                              provider.addFavorite(restaurant),
+                                          onPressed: () {
+                                            provider.addFavorite(restaurant);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    FavoriteUpdatePage(
+                                                        resto: restaurant),
+                                              ),
+                                            );
+                                          },
                                         ),
                                 ),
                               ],

@@ -7,6 +7,7 @@ class RestaurantModel {
   String pictureId;
   String city;
   double rating;
+  String? review;
 
   RestaurantModel({
     required this.id,
@@ -15,6 +16,7 @@ class RestaurantModel {
     required this.pictureId,
     required this.city,
     required this.rating,
+    this.review,
   });
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
@@ -25,6 +27,7 @@ class RestaurantModel {
         pictureId: json["pictureId"],
         city: json["city"],
         rating: json["rating"].toDouble(),
+        review: json["review"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,6 +37,7 @@ class RestaurantModel {
         "pictureId": pictureId,
         "city": city,
         "rating": rating,
+        "review": review,
       };
 
   String getSmallPicture() => Config.imageSmall + pictureId;

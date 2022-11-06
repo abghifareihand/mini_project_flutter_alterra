@@ -25,16 +25,17 @@ class FavoritePage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (provider.state == ResultState.error) {
-            return const Center(
-              child: Text('Empty data favorite'),
+            return Center(
+              child: Text(
+                'No data favorite',
+                style: orangeTextStyle.copyWith(
+                  fontSize: 20,
+                  fontWeight: semiBold,
+                ),
+              ),
             );
           } else {
-            return ListView.builder(
-              itemCount: provider.favorite.length,
-              itemBuilder: (context, index) {
-                return RestaurantTile(restaurant: provider.favorite[index]);
-              },
-            );
+            return const RestaurantTile();
           }
         },
       ),

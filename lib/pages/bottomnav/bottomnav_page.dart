@@ -39,8 +39,8 @@ class _BottomnavPageState extends State<BottomnavPage> {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 22,
-          vertical: 16,
+          horizontal: 60,
+          vertical: 10,
         ),
         child: GNav(
           backgroundColor: Colors.white,

@@ -12,8 +12,8 @@ Color darkBgColor = const Color(0xff020518);
 Color blueColor = const Color(0xff53C1F9);
 Color purpleColor = const Color(0xff5142E6);
 Color greenColor = const Color(0xff22B07D);
-Color mainColor = const Color(0xffFF4201);
-Color secondColor = const Color(0xffFFE8E0);
+Color mainColor = const Color(0xff539e83);
+Color secondColor = const Color(0xffDEF5E5);
 
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: blackColor,

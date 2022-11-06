@@ -1,5 +1,4 @@
 import 'package:mini_project_flutter_alterra/models/restaurant_model.dart';
-import 'package:mini_project_flutter_alterra/models/review_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -19,12 +18,12 @@ class DatabaseHelper {
   }
 
   static const String _tableFavorite = 'favorites';
-  static const String _tableReview = 'reviews';
+  //static const String _tableReview = 'reviews';
 
   Future<Database> _initializeDb() async {
     var path = await getDatabasesPath();
     var db = openDatabase(
-      join(path, 'restaurant.db'),
+      join(path, 'restolist.db'),
       //'$path/restaurantapp.db',
       onCreate: (db, version) async {
         await db.execute('''
@@ -34,13 +33,8 @@ class DatabaseHelper {
             description TEXT,
             pictureId TEXT,
             city TEXT,
-            rating REAL
-          )''');
-        await db.execute('''
-          CREATE TABLE $_tableReview (
-            id INTEGER PRIMARY KEY,
-            nameResto TEXT,
-            descResto TEXT
+            rating REAL,
+            review TEXT
           )''');
       },
       version: 1,
@@ -91,57 +85,14 @@ class DatabaseHelper {
     );
   }
 
-  //=====================================================================//
-
-  //=======================> METHOD REVIEW FORM <=========================//
-
-  Future<void> insertReview(ReviewModel review) async {
-    final Database db = await database;
-    await db.insert(_tableReview, review.toMap());
-  }
-
-  // metode untuk menampilkan seluruh note yang disimpan dalam database.
-  Future<List<ReviewModel>> getReview() async {
-    final Database db = await database;
-    List<Map<String, dynamic>> results = await db.query(_tableReview);
-
-    return results.map((res) => ReviewModel.fromMap(res)).toList();
-  }
-
-  // metode mengambil data dengan id tertentu
-  Future<ReviewModel> getReviewById(int id) async {
-    final Database db = await database;
-    List<Map<String, dynamic>> results = await db.query(
-      _tableReview,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-
-    return results.map((res) => ReviewModel.fromMap(res)).first;
-  }
-
-  // metode untuk memperbarui data
-  Future<void> updateReview(ReviewModel review) async {
+  Future<void> updateFavorite(RestaurantModel restaurant) async {
     final db = await database;
 
     await db.update(
-      _tableReview,
-      review.toMap(),
+      _tableFavorite,
+      restaurant.toJson(),
       where: 'id = ?',
-      whereArgs: [review.id],
+      whereArgs: [restaurant.id],
     );
   }
-
-  // metode untuk menghapus data
-  Future<void> deleteReview(int id) async {
-    final db = await database;
-
-    await db.delete(
-      _tableReview,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  }
-
-  //======================================================================//
 }

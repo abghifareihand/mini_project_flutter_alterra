@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
+import 'package:mini_project_flutter_alterra/widgets/profile_menu.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -14,82 +15,34 @@ class SettingPage extends StatelessWidget {
           'Settings',
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(20),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Account',
-                style: orangeTextStyle.copyWith(
-                  fontSize: 18,
-                  fontWeight: bold,
-                ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 30),
+        child: Column(
+          children: const [
+            SizedBox(
+              height: 120,
+              width: 120,
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/profile_image.png'),
+                child: Icon(Icons.camera_alt),
               ),
-              ListTile(
-                subtitle: Text(
-                  'Edit Profile',
-                  style: greyTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                  ),
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-              ListTile(
-                subtitle: Text(
-                  'Help',
-                  style: greyTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                  ),
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              Text(
-                'General',
-                style: orangeTextStyle.copyWith(
-                  fontSize: 18,
-                  fontWeight: bold,
-                ),
-              ),
-              ListTile(
-                subtitle: Text(
-                  'Privacy & Policy',
-                  style: greyTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                  ),
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-              ListTile(
-                subtitle: Text(
-                  'Term of Service',
-                  style: greyTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                  ),
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-              ListTile(
-                subtitle: Text(
-                  'Rate App',
-                  style: greyTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                  ),
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 16.0,
+            ),
+            ProfileMenu(
+              text: 'My Account',
+            ),
+            ProfileMenu(
+              text: 'Notifications',
+            ),
+            ProfileMenu(
+              text: 'Help Center',
+            ),
+            ProfileMenu(
+              text: 'Logout',
+            ),
+          ],
         ),
       ),
     );

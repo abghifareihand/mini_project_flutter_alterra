@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_flutter_alterra/models/restaurant_model.dart';
-import 'package:mini_project_flutter_alterra/pages/review/review_list_page.dart';
+import 'package:mini_project_flutter_alterra/pages/favorite/favorite_update_page.dart';
 import 'package:mini_project_flutter_alterra/providers/database_provider.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
-import 'package:mini_project_flutter_alterra/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
 class RestaurantDetailPage extends StatelessWidget {
@@ -16,23 +15,62 @@ class RestaurantDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget backButton() {
-      return InkWell(
-        onTap: () {
-          Navigator.pop(context);
+      return Consumer<DatabaseProvider>(
+        builder: (context, provider, child) {
+          return FutureBuilder<bool>(
+            future: provider.isFavorited(restaurant.id),
+            builder: (context, snapshot) {
+              var isFavorited = snapshot.data ?? false;
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(defaultMargin),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back),
+                      color: mainColor,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(defaultMargin),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: isFavorited
+                        ? IconButton(
+                            icon: const Icon(Icons.favorite),
+                            color: Colors.redAccent,
+                            onPressed: () =>
+                                provider.deleteFavorite(restaurant.id),
+                          )
+                        : IconButton(
+                            icon: const Icon(Icons.favorite_border),
+                            color: Colors.redAccent,
+                            onPressed: () {
+                              provider.addFavorite(restaurant);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      FavoriteUpdatePage(resto: restaurant),
+                                ),
+                              );
+                            },
+                          ),
+                  ),
+                ],
+              );
+            },
+          );
         },
-        child: Container(
-          margin: EdgeInsets.all(defaultMargin),
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: secondColor,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Icon(
-            Icons.arrow_back,
-            size: 28,
-            color: mainColor,
-          ),
-        ),
       );
     }
 
@@ -55,164 +93,111 @@ class RestaurantDetailPage extends StatelessWidget {
     }
 
     Widget content() {
-      return Consumer<DatabaseProvider>(
-        builder: (context, provider, child) {
-          return FutureBuilder<bool>(
-            future: provider.isFavorited(restaurant.id),
-            builder: (context, snapshot) {
-              var isFavorited = snapshot.data ?? false;
-              return Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(
-                  horizontal: defaultMargin,
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: 256,
+      return Container(
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(
+          horizontal: defaultMargin,
+        ),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                top: 300,
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(
+                top: 20,
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 20,
+              ),
+              decoration: BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        restaurant.name,
+                        style: blackTextStyle.copyWith(
+                          fontSize: 20,
+                          fontWeight: semiBold,
+                        ),
                       ),
-                      child: Row(
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
                         children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  restaurant.name,
-                                  style: whiteTextStyle.copyWith(
-                                    fontSize: 24,
-                                    fontWeight: semiBold,
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.star,
-                                      size: 24,
-                                      color: Colors.amber,
-                                    ),
-                                    Text(
-                                      restaurant.rating.toString(),
-                                      style: whiteTextStyle.copyWith(
-                                        fontWeight: bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                          const Icon(
+                            Icons.location_on,
+                            size: 20,
+                            color: Colors.redAccent,
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: isFavorited
-                                ? IconButton(
-                                    icon: const Icon(Icons.favorite),
-                                    color: Colors.redAccent,
-                                    onPressed: () =>
-                                        provider.deleteFavorite(restaurant.id),
-                                  )
-                                : IconButton(
-                                    icon: const Icon(Icons.favorite_border),
-                                    color: Colors.redAccent,
-                                    onPressed: () =>
-                                        provider.addFavorite(restaurant),
-                                  ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(
-                        top: 30,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 30,
-                      ),
-                      decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
                           Text(
-                            'About',
+                            restaurant.city,
                             style: blackTextStyle.copyWith(
                               fontSize: 16,
                               fontWeight: semiBold,
                             ),
                           ),
-                          const SizedBox(
-                            height: 6,
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.star,
+                            color: Colors.amber,
                           ),
                           Text(
-                            restaurant.description,
-                            style: blackTextStyle.copyWith(),
-                            textAlign: TextAlign.justify,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 30,
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.location_on,
-                                      size: 24,
-                                      color: mainColor,
-                                    ),
-                                    Text(
-                                      restaurant.city,
-                                      style: blackTextStyle.copyWith(
-                                        fontSize: 18,
-                                        fontWeight: semiBold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            '${restaurant.rating}',
+                            style: blackTextStyle.copyWith(
+                              fontWeight: semiBold,
                             ),
                           ),
-                          CustomButton(
-                            title: 'Review',
-                            width: 100,
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ReviewListPage(),
-                                ),
-                              );
-                            },
-                          ),
                         ],
                       ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16.0,
+                  ),
+                  Text(
+                    'Description :',
+                    style: blackTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
                     ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
+                  ),
+                  Text(
+                    restaurant.description,
+                    style: blackTextStyle.copyWith(
+                      fontWeight: light,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(
+                vertical: 30,
+              ),
+            ),
+          ],
+        ),
       );
     }
 

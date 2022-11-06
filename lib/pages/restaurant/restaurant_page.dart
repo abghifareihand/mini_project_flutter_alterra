@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_flutter_alterra/main.dart';
 import 'package:mini_project_flutter_alterra/providers/restaurant_provider.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
 import 'package:mini_project_flutter_alterra/utils/result_state.dart';
@@ -22,15 +21,12 @@ class _RestaurantPageState extends State<RestaurantPage> {
 
   @override
   Widget build(BuildContext context) {
-    final text = MediaQuery.of(context).platformBrightness == Brightness.dark
-        ? 'DarkTheme'
-        : 'LightTeme';
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: mainColor,
         title: const Text(
-          'Restaurant List',
+          'Restolist App',
         ),
       ),
       body: Consumer<RestaurantProvider>(

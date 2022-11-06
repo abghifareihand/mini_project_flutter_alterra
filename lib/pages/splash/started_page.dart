@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_flutter_alterra/pages/bottomnav/bottomnav_page.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mini_project_flutter_alterra/styles/theme.dart';
 import 'package:mini_project_flutter_alterra/widgets/custom_button.dart';
 
@@ -13,24 +13,18 @@ class GetStartedPage extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(
-              bottom: 150,
+              bottom: 100,
             ),
             width: double.infinity,
             height: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  'assets/image_started.png',
-                ),
-              ),
-            ),
+            child: Lottie.asset('assets/logo_lottie.json'),
           ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'Order Your Food',
+                  'Restolist App',
                   style: orangeTextStyle.copyWith(
                     fontSize: 32,
                     fontWeight: semiBold,
@@ -40,7 +34,7 @@ class GetStartedPage extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'Now you can order your food\nanytime from your mobile.',
+                  'Now you can favorite your restaurant\nanytime from your mobile.',
                   style: orangeTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: light,
@@ -55,23 +49,7 @@ class GetStartedPage extends StatelessWidget {
                     bottom: 80,
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const BottomnavPage(),
-                        transitionsBuilder:
-                            (context, animation, secondaryAnimation, child) {
-                          final tween = Tween(
-                            begin: const Offset(0, 1),
-                            end: Offset.zero,
-                          );
-                          return SlideTransition(
-                            position: animation.drive(tween),
-                            child: child,
-                          );
-                        },
-                      ),
-                    );
+                    Navigator.pushNamed(context, '/home');
                   },
                 ),
               ],
