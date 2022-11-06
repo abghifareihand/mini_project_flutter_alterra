@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => DatabaseProvider(),
         ),
-
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -31,7 +30,6 @@ class MyApp extends StatelessWidget {
           primaryColor: mainColor,
         ),
         routes: {
-      
           '/': (context) => const GetStartedPage(),
           '/home': (context) => const BottomnavPage(),
         },
