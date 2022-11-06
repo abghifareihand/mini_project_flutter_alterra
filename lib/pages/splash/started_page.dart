@@ -13,7 +13,7 @@ class GetStartedPage extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(
-              bottom: 100,
+              bottom: 200,
             ),
             width: double.infinity,
             height: double.infinity,
@@ -46,7 +46,7 @@ class GetStartedPage extends StatelessWidget {
                   width: 220,
                   margin: const EdgeInsets.only(
                     top: 50,
-                    bottom: 80,
+                    bottom: 180,
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');

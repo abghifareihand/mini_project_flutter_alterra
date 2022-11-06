@@ -1,16 +1,24 @@
-# mini_project_flutter_alterra
+# Mini Project Flutter Alterra
 
-A new Flutter project.
 
-## Getting Started
+<br>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Restolist App
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Splash Page | Restaurant Page | Detail Page
+:---------:|:----------:|:-----------:|
+<img src="https://i.ibb.co/h1NLFx2/splash.png" width=300/> | <img src="https://i.ibb.co/g60xPRj/restaurant-page.png" width=300/> | <img src="https://i.ibb.co/xmPVxsZ/detail-page.png" width=300/> |
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Favorite Page | Form Page | Setting Page
+:---------:|:----------:|:-----------:|
+<img src="https://i.ibb.co/n3RC3pX/favorite-page.png" width=300/> | <img src="https://i.ibb.co/3fjj7CZ/form-page.png" width=300/> | <img src="https://i.ibb.co/z5vrPnR/setting-page.png" width=300/> |
+
+<br>
+
+### Apps Feature:
+
+- Show List of Restaurants
+- Restaurant Details
+- CRUD Review Restaurants
+- Favorite Restaurants

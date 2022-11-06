@@ -140,8 +140,9 @@ class RestaurantTile extends StatelessWidget {
                           ),
                           Text(
                             ulas.city,
-                            style: const TextStyle(
+                            style: blackTextStyle.copyWith(
                               fontSize: 16,
+                              fontWeight: medium,
                             ),
                           ),
                         ],
@@ -151,7 +152,9 @@ class RestaurantTile extends StatelessWidget {
                       ),
                       Text(
                         ulas.review ?? '',
-                        style: greyTextStyle.copyWith(),
+                        style: blackTextStyle.copyWith(
+                          fontWeight: light,
+                        ),
                       ),
                     ],
                   ),
