@@ -15,8 +15,8 @@ class GetStartedPage extends StatelessWidget {
             margin: const EdgeInsets.only(
               bottom: 200,
             ),
-            width: double.infinity,
-            height: double.infinity,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             child: Lottie.asset('assets/logo_lottie.json'),
           ),
           Center(
