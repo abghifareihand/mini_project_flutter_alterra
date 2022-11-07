@@ -18,13 +18,11 @@ class DatabaseHelper {
   }
 
   static const String _tableFavorite = 'favorites';
-  //static const String _tableReview = 'reviews';
 
   Future<Database> _initializeDb() async {
     var path = await getDatabasesPath();
     var db = openDatabase(
       join(path, 'restolist.db'),
-      //'$path/restaurantapp.db',
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE $_tableFavorite (
